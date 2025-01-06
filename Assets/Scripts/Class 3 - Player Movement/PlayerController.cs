@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     bool inDialog = false;
 
+    bool IsInCombat = false;
+
     public static PlayerController instance;
     private void Awake()
     {
@@ -123,4 +125,26 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<CombatReceiver>() != null && !other.isTrigger)
+        {
+            if (other.GetComponent<CombatReceiver>().GetFactionID() != factionID)
+            {
+                Debug.Log("In INside Triggered");
+                MusicManager.instance.ChangeMusicLayer(MusicLayers.Battle);
+            }
+                
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<CombatReceiver>() != null && !other.isTrigger)
+        {
+            if (other.GetComponent<CombatReceiver>().GetFactionID() != factionID)
+                MusicManager.instance.ChangeMusicLayer(MusicLayers.Exploration);
+        }
+    }
 }
