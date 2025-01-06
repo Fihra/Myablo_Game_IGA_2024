@@ -31,6 +31,8 @@ public class EquippableAbility : ClassSkill
         if (hit.collider.gameObject.GetComponent<Clickable>())
         {
             targetedReceiver = hit.collider.gameObject.GetComponent<CombatReceiver>();
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.playerAttack, transform.position);
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.enemyReceiveDamage, transform.position);
         }
     }
     protected virtual void SpawnEquippedAttack(Vector3 location)
