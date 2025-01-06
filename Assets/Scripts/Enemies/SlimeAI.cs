@@ -1,33 +1,30 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-public class SkeletonAI : BasicAI
+public class SlimeAI : BasicAI
 {
-    enum SkeletonState
+
+    enum SlimeState
     {
         Wandering, Pursuing, Attacking, Dead
     }
 
-    SkeletonState aiState = SkeletonState.Wandering;
+    SlimeState aiState = SlimeState.Wandering;
 
-    // Wander State variables
     [SerializeField] float maxWanderDistance = 6f;
     Vector3 startPosition = Vector3.zero;
 
-    // Pursuit State Variables
     GameObject target;
     [SerializeField] float maxPursuitDistance = 15f;
     [SerializeField] float attackRange = 1.75f;
 
-    // Attack State Variables
-    [SerializeField] float damage = 3;
-    [SerializeField] float attackCooldown = 2.5f;
+    [SerializeField] float damage = 1f;
+    [SerializeField] float attackCooldown = 1.5f;
     float attackCooldownTimer = 0.0f;
     [SerializeField] GameObject attackPrefab;
 
-    // Death variables
-    [SerializeField] float experienceValue = 45;
+    [SerializeField] float experienceValue = 20;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         startPosition = transform.position;
@@ -40,20 +37,16 @@ public class SkeletonAI : BasicAI
     {
         switch(aiState)
         {
-            case SkeletonState.Wandering:
-                // Run the Wandering Functionality
+            case SlimeState.Wandering:
                 RunWandering();
                 break;
-            case SkeletonState.Pursuing:
-                //Run the Pursuing
+            case SlimeState.Pursuing:
                 RunPursuing();
                 break;
-            case SkeletonState.Attacking:
-                //RRun atacking
+            case SlimeState.Attacking:
                 RunAttacking();
                 break;
-            case SkeletonState.Dead:
-                //dead
+            case SlimeState.Dead:
                 break;
         }
     }
@@ -61,9 +54,10 @@ public class SkeletonAI : BasicAI
     #region Wandering
     void TriggerWandering()
     {
-        aiState = SkeletonState.Wandering;
+        aiState = SlimeState.Wandering;
         GetNewWanderDestination();
     }
+
     void RunWandering()
     {
         float x = agent.destination.x;
@@ -94,7 +88,7 @@ public class SkeletonAI : BasicAI
     #region Pursuing
     void TriggerPursuing(GameObject targetToPursue)
     {
-        aiState = SkeletonState.Pursuing;
+        aiState = SlimeState.Pursuing;
         target = targetToPursue;
     }
 
@@ -106,7 +100,6 @@ public class SkeletonAI : BasicAI
             return;
         }
 
-        // Go to your target's position
         agent.destination = target.transform.position;
 
         if (TargetIsInAttackRange())
@@ -130,46 +123,43 @@ public class SkeletonAI : BasicAI
     #region Attacking
     void TriggerAttacking()
     {
-        aiState = SkeletonState.Attacking;
-        agent.destination = transform.position; //stop runnning
+        aiState = SlimeState.Attacking;
+        agent.destination = transform.position;
     }
 
     void RunAttacking()
     {
-        // Swing every attacCD second
         attackCooldownTimer += Time.deltaTime;
 
-        // If the cooldown is up, throw a punch
         if(attackCooldownTimer >= attackCooldown)
         {
             attackCooldownTimer -= attackCooldown;
             SpawnAttackPrefab();
             GetComponent<EnemyAnimator>().TriggerAttack();
-            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.enemyAttack, transform.position);
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.slimeAttack, transform.position);
         }
 
-        // If the target is out of attack range, pursue
         if (!TargetIsInAttackRange())
             TriggerPursuing(target);
     }
+
     void SpawnAttackPrefab()
     {
-        //Utility Function
         Vector3 attackDirection = (target.transform.position - transform.position);
         Vector3 spawnPosition = (attackDirection.normalized * attackRange) + transform.position;
 
         GameObject newAttack = Instantiate(attackPrefab, spawnPosition, Quaternion.identity);
         newAttack.GetComponent<CombatActor>().SetFactionID(factionID);
     }
+
     #endregion
 
     #region Dead
     public override void TriggerDeath()
     {
+        //Debug.Log("Or am i dead here");
         base.TriggerDeath();
-        // Add some experience!
         EventsManager.instance.onExperienceGranted.Invoke(experienceValue);
-
     }
     #endregion
 

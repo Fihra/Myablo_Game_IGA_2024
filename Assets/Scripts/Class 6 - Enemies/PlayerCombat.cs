@@ -37,6 +37,7 @@ public class PlayerCombat : CombatReceiver
     {
         base.TakeDamage(amount);
         EventsManager.instance.onHealthChanged.Invoke(currentHP / maxHP);
+        FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.playerReceiveDamage, transform.position);
     }
 
     public override void Die()
