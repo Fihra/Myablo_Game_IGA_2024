@@ -71,6 +71,7 @@ public class PlayerCharacterSheet : MonoBehaviour
         statPointsToSpend += 5;
         skillPointsToSpend++;
         EventsManager.instance.onPlayerLeveledUp.Invoke();
+        FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.levelUpUI, transform.position);
     }
 
     #endregion

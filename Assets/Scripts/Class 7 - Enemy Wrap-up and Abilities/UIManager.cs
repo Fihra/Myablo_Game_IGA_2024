@@ -48,8 +48,17 @@ public class UIManager : MonoBehaviour
     }
     public void ToggleCharacterStatsPanel()
     {
-        if (characterStatPanel.activeInHierarchy) HideCharacterStatsPanel();
-        else ShowCharacterStatsPanel();
+        if (characterStatPanel.activeInHierarchy)
+        {
+            HideCharacterStatsPanel();
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.cancelUI, transform.position);
+        }
+        else
+        {
+            ShowCharacterStatsPanel();
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.confirmUI, transform.position);
+        }
+            
     }
 
     #endregion
@@ -67,8 +76,17 @@ public class UIManager : MonoBehaviour
 
     public void ToggleSkillTree()
     {
-        if (skillTree.activeInHierarchy) HideSkillTree();
-        else ShowSkillTree();
+        if (skillTree.activeInHierarchy)
+        {
+            HideSkillTree();
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.cancelUI, transform.position);
+        }
+        else
+        {
+            ShowSkillTree();
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.confirmUI, transform.position);
+        }
+            
     }
 
     #endregion
