@@ -331,7 +331,16 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Desktop/Master
-  Banks: []
+  Banks:
+  - Desktop/Environment
+  - Desktop/Environment.assets
+  - Desktop/Master.assets
+  - Desktop/Music
+  - Desktop/Music.assets
+  - Desktop/SFX
+  - Desktop/SFX.assets
+  - Desktop/UI
+  - Desktop/UI.assets
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
