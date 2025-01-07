@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         if(distanceToTarget > 1)
         {
             //For Footsteps SFX
-            //FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.grassFootsteps, transform.position);
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.grassFootsteps, transform.position);
         }
     }
 }
