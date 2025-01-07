@@ -36,6 +36,7 @@ public class FireballCA : CombatActor
             if (check.GetFactionID() != factionID)
             {
                 HitReceiver(check);
+                FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.playerFireHit, transform.position);
                 Destroy(gameObject);
             }
         }

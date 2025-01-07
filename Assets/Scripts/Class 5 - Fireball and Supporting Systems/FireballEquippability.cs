@@ -25,6 +25,7 @@ public class FireballEquippability : EquippableAbility
             SpawnEquippedAttack(hit.point);
             myPlayer.Movement().MoveToLocation(myPlayer.transform.position);
             //Play Fireball SFX here
+            FMODAudioManager.instance.PlayOneShot(FMODEvents.instance.playerFireCast, transform.position);
             myPlayer.Combat().SpendMana(manaCost);
         }
         else

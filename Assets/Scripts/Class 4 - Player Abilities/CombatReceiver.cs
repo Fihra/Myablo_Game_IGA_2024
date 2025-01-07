@@ -19,6 +19,11 @@ public class CombatReceiver : Clickable
         alive = false;
     }
 
+    public bool IsAlive()
+    {
+        return alive;
+    }
+
     public void SetFactionID(int newID)
     {
         factionID = newID;
