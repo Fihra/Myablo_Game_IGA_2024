@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4076728955114109595}
   m_Layer: 0
   m_Name: SkeletonPrefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +121,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWanderDistance: 6
+  maxPursuitDistance: 15
+  attackRange: 1.75
+  damage: 3
+  attackCooldown: 2.5
+  attackPrefab: {fileID: 0}
+  experienceValue: 45
 --- !u!1001 &2940730823941568373
 PrefabInstance:
   m_ObjectHideFlags: 0
