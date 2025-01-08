@@ -20,6 +20,11 @@ public class BasicAI : MonoBehaviour
         if (alive) RunAI();
     }
 
+    public bool GetAlive()
+    {
+        return alive;
+    }
+
     protected virtual void RunAI()
     {
 
@@ -42,11 +47,13 @@ public class BasicAI : MonoBehaviour
             GetComponent<EnemyAnimator>().TriggerDeath();
         }
 
-        Collider[] attachedColliders = GetComponents<Collider>();
-        foreach(Collider c in attachedColliders)
-        {
-            c.enabled = false;
-        }
+        MusicTrigger.enemyCounter -= 2;
+
+        //Collider[] attachedColliders = GetComponents<Collider>();
+        //foreach(Collider c in attachedColliders)
+        //{
+        //    c.enabled = false;
+        //}
 
         agent.enabled = false;
     }
