@@ -6587,7 +6587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3949291237952846823, guid: 965fd80ebb9864b44962f800a7ac3002, type: 3}
       propertyPath: dialogDatas.Array.data[4].dialogText
-      value: And why is there only 4 houses when there's 5 of us?
+      value: And why are there 5 houses when there's only 4 of us?
       objectReference: {fileID: 0}
     - target: {fileID: -3949291237952846823, guid: 965fd80ebb9864b44962f800a7ac3002, type: 3}
       propertyPath: dialogDatas.Array.data[5].dialogText
