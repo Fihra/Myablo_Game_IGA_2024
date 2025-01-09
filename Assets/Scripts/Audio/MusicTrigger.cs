@@ -13,7 +13,7 @@ public class MusicTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Enemy Counter: {enemyCounter}");
+        //Debug.Log($"Enemy Counter: {enemyCounter}");
         if (enemyCounter < 1) MusicManager.instance.ChangeMusicLayer(MusicLayers.Exploration);
         else MusicManager.instance.ChangeMusicLayer(MusicLayers.Battle);
     }

@@ -30,6 +30,11 @@ public class MusicManager : MonoBehaviour
         ChangeMusicLayer(MusicLayers.Exploration);
     }
 
+    public EventInstance GetMusicInstance()
+    {
+        return musicEventInstance;
+    }
+
     // Update is called once per frame
     void Update()
     {
